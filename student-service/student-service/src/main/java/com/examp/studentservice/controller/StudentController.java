@@ -24,7 +24,13 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public Page<Student> getAllStudents(Pageable pageable) {
+    public List<Student> getAllStudents() {
+        log.info("Inside getAllStudents method inside StudentController");
+        return studentService.getStudents();
+    }
+
+    @GetMapping("/studentsByPage")
+    public Page<Student> getAllStudentsByPagination(Pageable pageable) {
         log.info("Inside getAllStudents method inside StudentController");
         return studentService.getStudentsByPagination(pageable);
     }
