@@ -5,6 +5,8 @@ import com.examp.studentservice.exception.StudentNotFoundException;
 import com.examp.studentservice.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +65,11 @@ public class StudentService {
         }
         this.studentRepository.delete(student);
         return ResponseEntity.ok().build();
+    }
+
+    public Page<Student> getStudentsByPagination(Pageable pageable) {
+        log.info("Inside getStudentByPagination method of StudentService");
+        return studentRepository.findAll(pageable);
+
     }
 }

@@ -4,6 +4,8 @@ import com.examp.studentservice.entity.Student;
 import com.examp.studentservice.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +24,9 @@ public class StudentController {
     }
 
     @GetMapping("/students")
-    public List<Student> getAllStudents() {
+    public Page<Student> getAllStudents(Pageable pageable) {
         log.info("Inside getAllStudents method inside StudentController");
-        return studentService.getStudents();
+        return studentService.getStudentsByPagination(pageable);
     }
 
     @GetMapping("/student/{id}")
